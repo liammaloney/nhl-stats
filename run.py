@@ -37,11 +37,16 @@ def get_player_id(name):
             if j['person']['fullName'].lower()==name.lower():
                 id=j['person']['id']
                 break
-    return(id)
+    if 'id' in locals():
+        return(id)
+    else:
+        print('Player not found')
 
 print('Enter full name of an NHL player')
 name = input()
 os.system('clear')
 player_id = get_player_id(name)
-print(name+'\'s Statistics')
-get_player_stats(player_id)
+
+if player_id!=None:
+    print(name+'\'s Statistics')
+    get_player_stats(player_id)
