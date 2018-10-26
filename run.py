@@ -1,9 +1,10 @@
 import json
 import requests
 import os
+import timeit
 
 ids = [1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,52,53,54]
-
+start = timeit.timeit()
 def get_player_stats(id):
     url = 'https://statsapi.web.nhl.com/api/v1/people/'+str(id)+'/stats?stats=gameLog&season=20182019'
 
@@ -27,18 +28,22 @@ def get_player_stats(id):
     print('P/GP           ' + str(round(((goals + assists)/games_played),2)))
 
 def get_player_id(name):
-    for i in ids:
-        url = 'https://statsapi.web.nhl.com/api/v1/teams/'+str(i)+'/roster'
+    flag = 0
+    count = len(ids)
+    while(flag == 0 and count!=0):
+        count = count - 1
+        id = ids[count]
+        url = 'https://statsapi.web.nhl.com/api/v1/teams/'+str(id)+'/roster'
         response = requests.get(url).json()
-        roster = response['roster']   
-        # print(roster)  
-        for j in roster:
-            # print(j['person']['fullName'])
-            if j['person']['fullName'].lower()==name.lower():
-                id=j['person']['id']
-                break
+        roster = response['roster']  
+        rcount = len(roster)
+        while(flag == 0 and rcount!=0):
+            rcount = rcount - 1
+            if roster[rcount]['person']['fullName'].lower()==name.lower():
+                player_id = roster[rcount]['person']['id']
+                flag = 1
     if 'id' in locals():
-        return(id)
+        return(player_id)
     else:
         print('Player not found')
 
@@ -50,3 +55,6 @@ player_id = get_player_id(name)
 if player_id!=None:
     print(name+'\'s Statistics')
     get_player_stats(player_id)
+
+end = timeit.timeit()
+print(end-start)
