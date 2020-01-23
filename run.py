@@ -5,7 +5,7 @@ import timeit
 
 ids = [1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,52,53,54]
 def get_player_stats(id):
-    url = 'https://statsapi.web.nhl.com/api/v1/people/'+str(id)+'/stats?stats=gameLog&season=20182019'
+    url = 'https://statsapi.web.nhl.com/api/v1/people/'+str(id)+'/stats?stats=gameLog&season=20192020'
 
     response = requests.get(url).json()
     games = response['stats'][0]['splits']
