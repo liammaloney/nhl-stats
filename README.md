@@ -11,6 +11,6 @@ Note, this is a base for a later project.
 
 This command will give the user the Ottawa Senators' odds of picking first overall as well as the worst case first round pick positions given the current day's statistics. Only works for 2019/2020 season currently
 ```
-python3 worst_case_lottery.py
+python3 gui.py
 ```
 
