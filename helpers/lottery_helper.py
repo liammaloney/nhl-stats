@@ -1,7 +1,7 @@
 import json
 import requests
 
-lottery_odds = {
+LOTTERY_ODDS = {
     1 : 0,
     2 : 0,
     3 : 0,
